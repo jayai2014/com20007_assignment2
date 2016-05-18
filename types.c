@@ -39,7 +39,8 @@ char *str_copy(char *src) {
 	copy = (char*)malloc(sizeof(char)*(strlen(src)+1));
 	assert(copy);
 	strcpy(copy, src); 
-	printf("%s",copy);
+	/* Replace \n with \0 */
+	copy[strlen(copy)-1] = '\0';
     return copy;
 }
 
@@ -47,6 +48,7 @@ char *str_copy(char *src) {
 void str_print(FILE *file, char *str) {
 	if (file != NULL){
 		fprintf(file, str);
+		/*fputs(str, file);*/
 	}
 }
 
