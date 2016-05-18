@@ -1,0 +1,80 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <limits.h>
+#include <assert.h>
+#define MAXSTRLEN 256
+
+#define MIN(x, y) ((x)<(y) ? (x):(y)) 
+int bad(char* key, int size){
+	/* Assume strand() has been called */
+	static int a;
+	static int flag = 1;
+	if (flag == 1){
+	/* a only changes once*/
+		/* a is random within [0,size) */
+		a = rand()%size;
+		flag ++;
+	}
+	return a*key[0]%size;
+}
+unsigned int universal_hash(unsigned char *key, unsigned int size) {
+    int len, i, sum;
+    if (strlen((char*)key) > MAXSTRLEN){
+    	len = MAXSTRLEN;
+    }else{
+    	len = strlen((char*)key);
+    }
+    
+    sum = 0;
+
+    for (i=0; i<len; i++)
+    {
+    	/* Assume strand() has been called */
+    	sum = sum + (rand()%size)*key[i];
+    }
+    
+	return sum%size;
+}
+
+
+int main()
+{
+	static int seed = 0;
+	srand(seed);
+	int size = 23;
+	char* key1 = "aa";
+	char* key2 = "bb";
+	unsigned char* key3 = (unsigned char*)"aa";
+	int a = 255;
+	unsigned char maxplusone = 202;
+	unsigned char one = 1;
+	unsigned char key[2];
+	key[0] = one;
+	key[1] = one;
+	
+	printf("\nbad hash val= %d\n", bad(key1,size));
+	printf("bad hash val= %d\n", bad(key1,size));
+	printf("bad hash val= %d\n", bad(key2,size));
+	printf("key length= %d\n",sizeof(key3)/sizeof(unsigned char));
+	printf("unsigned char len= %d\n",sizeof(unsigned char));
+	
+	unsigned int b =  one *1;
+	printf("unsigned char * int = %d\n",b);
+	printf("key length= %d\n",strlen((char*)key3));
+	printf("universal hash= %d\n",universal_hash(key,size));
+	printf("min(1,2)=%d",MIN(1,2));
+	/*printf("bad hash(%s) = %d\n",key2,
+		universal_hash((unsigned char*)key2,size));*/
+	/*printf("generated: %c", (unsigned char)(a+1));*/
+	maxplusone++;
+	printf("max+1=%c", maxplusone);
+    return 0;
+    
+			/*
+			for (i=0; i<key_len; i++) {
+				printf("%c [%u]",keys[progress][i], keys[progress][i]);
+			}
+			printf("(no.%d, len=%d)\n",progress, strlen((char*)keys[progress]));
+			/
+}
