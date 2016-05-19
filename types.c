@@ -46,9 +46,8 @@ char *str_copy(char *src) {
 
 /* Prints str to file */
 void str_print(FILE *file, char *str) {
-	if (file != NULL){
+	if (file != NULL && str != NULL){
 		fprintf(file, str);
-		/*fputs(str, file);*/
 	}
 }
 
