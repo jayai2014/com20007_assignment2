@@ -1,4 +1,4 @@
-# COMP30027 Design of Algorithms 2016 Assignment 2
+# COMP20007 Design of Algorithms 2016 Assignment 2
 
 Hashing with C
 
